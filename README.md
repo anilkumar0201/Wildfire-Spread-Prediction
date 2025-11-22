@@ -1,8 +1,7 @@
----
 
-# 🔥 Wildfire Spread Prediction using Deep U-Net
+#  Wildfire Spread Prediction using Deep U-Net
 
-### 🧠 Project Overview
+###  Project Overview
 
 This project implements a **deep U-Net convolutional neural network** to predict **next-day wildfire spread** across the United States using multi-source environmental and geospatial data aggregated from 2012 – 2020.
 Each training sample represents a **64 × 64 km** region (1 km resolution) with 12 input features describing weather, vegetation, and terrain conditions.
@@ -10,17 +9,17 @@ The model performs **pixel-wise segmentation** to forecast which grid cells are 
 
 ---
 
-## 🚀 Key Contributions
+##  Key Contributions
 
-* 📦 Built a full **TensorFlow TFRecord data pipeline** for efficient loading, parsing, and normalization of 18 k+ wildfire samples.
-* ⚙️ Designed a **deep U-Net** (encoder–decoder with skip connections) for spatial fire-mask prediction.
-* 📉 Implemented **combined Binary Cross-Entropy + Dice loss** to address heavy class imbalance (few fire pixels).
-* 📊 Achieved an average **IoU = 0.25–0.30** on held-out test data.
-* 🎯 Visualized predicted vs true fire masks to evaluate spatial accuracy.
+*  Built a full **TensorFlow TFRecord data pipeline** for efficient loading, parsing, and normalization of 18 k+ wildfire samples.
+*  Designed a **deep U-Net** (encoder–decoder with skip connections) for spatial fire-mask prediction.
+*  Implemented **combined Binary Cross-Entropy + Dice loss** to address heavy class imbalance (few fire pixels).
+*  Achieved an average **IoU = 0.25–0.30** on held-out test data.
+*  Visualized predicted vs true fire masks to evaluate spatial accuracy.
 
 ---
 
-## 🗂️ Dataset Summary
+##  Dataset Summary
 
 | Feature Type       | Name                                  | Description / Units                                        | Effect on Fire Spread                       |
 | ------------------ | ------------------------------------- | ---------------------------------------------------------- | ------------------------------------------- |
@@ -34,7 +33,7 @@ The model performs **pixel-wise segmentation** to forecast which grid cells are 
 
 ---
 
-## 🧩 Data Pipeline Architecture
+##  Data Pipeline Architecture
 
 ```text
 TFRecord files
@@ -57,7 +56,7 @@ x_{norm} = \frac{x - \mu}{\sigma + 10^{-6}}
 
 ---
 
-## 🧱 Model Architecture — Deep U-Net (64×64)
+##  Model Architecture — Deep U-Net (64×64)
 
 | Stage      | Operation                                     | Output Shape         |
 | ---------- | --------------------------------------------- | -------------------- |
@@ -72,7 +71,7 @@ x_{norm} = \frac{x - \mu}{\sigma + 10^{-6}}
 
 ---
 
-## ⚙️ Training Configuration
+##  Training Configuration
 
 | Parameter  | Value                                              |
 | ---------- | -------------------------------------------------- |
@@ -85,48 +84,15 @@ x_{norm} = \frac{x - \mu}{\sigma + 10^{-6}}
 
 ---
 
-## 🧮 Evaluation
+##  Evaluation
 
 | Metric                  | Test Result                                                                              |
 | ----------------------- | ---------------------------------------------------------------------------------------- |
 | **IoU**                 | ≈ 0.30                                                                            |
 | **Qualitative Results** | Model accurately highlights fire-prone areas; occasional false positives in dry regions. |
 
-Example visualization:
-
-|    Previous Day Fire    |       Ground Truth      |   Predicted Fire Mask   |
-| :---------------------: | :---------------------: | :---------------------: |
-| ![](docs/prev_fire.png) | ![](docs/true_mask.png) | ![](docs/pred_mask.png) |
-
----
-
-## 📊 Inference Visualization
-
-```python
-show_inference(
-    n_rows=3,
-    features=sample_inputs,
-    label=sample_labels,
-    prediction_function=lambda x: model.predict(x)
-)
-```
-
----
-
-## 🧰 Tech Stack
-
-* **TensorFlow 2 / Keras** – model and data pipeline
-* **NumPy / Matplotlib** – statistics and visualization
-* **Google Colab** – GPU training environment
-* **Python 3.8+**
-
----
 
 
-### ⭐ Quick Summary for Interview
 
-> “I built a full TFRecord → TensorFlow pipeline for wildfire segmentation.
-> It reads 64×64 spatial grids, normalizes 12 environmental features,
-> and trains a deep U-Net using BCE + Dice loss to predict next-day fire spread with IoU ≈ 0.3.”
 
 
